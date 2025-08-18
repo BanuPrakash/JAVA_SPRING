@@ -9,11 +9,11 @@ import java.lang.reflect.Method;
 public class ProductClient {
     public static void main(String[] args) {
         Product[] products = new Product[4];
-        products[0] = new Mobile(34, "MotoG", 5000.00, "5G");
+        products[0] = new Mobile(34, "MotoG", 5000.00, "5G"); //up casting
         products[1] = new Tv(51, "Onida Thunder", 3500, "CRT");
         products[2] = new Tv(91, "Sony Bravia", 2_90_000.00, "OLED");
         products[3] = new Mobile(91, "iPhone 16", 89000.00, "5G");
-
+//        products[4] = new Product(); 
         // mobile[]
         // tv[]
         // for loop for mobile
@@ -33,7 +33,7 @@ public class ProductClient {
             // using RTTI, Reflection API
             Method[] methods = clazz.getMethods(); // methods of class + inherited
             for(Method m : methods) {
-                if(m.getName().startsWith("get")) {
+                if(m.getName().startsWith("get") ) {
                     try {
                         Object ret = m.invoke(p); // reflection API
                         System.out.println(m.getName().substring(3).toUpperCase() + " : " + ret);

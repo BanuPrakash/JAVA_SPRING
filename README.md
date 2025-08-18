@@ -282,12 +282,114 @@ p.getClass() == Product.class ==> false
 
 ```
 
+Java Bean naming conventions are getters for accessor and setters for mutation
+
 If we know the method in advance:
 context.method(); like p.getPrice(); // works
 
+=========
+
+keyword "abstract"
+
+```
+
+abstract classes --> incomplete class, can't instantiate; such objects doesn't exist in real world
+abstract classes are just meant for generalization purpose
+pushing common state and behaviour to the abstract class.
 
 
+I need to buy a Product. 
+Sales Guy ask what type / reason
 
+I need to open an Banking account?
+Manager: Savings / Current / ...
+
+abstract methods --> incomplete methods; enforce all inherited classes to compulsorily implement them
+
+```
+
+keyword "final"
+
+1) to declare a constant
+
+private final static double PI = 3.14159;
+
+prefer constants to be static also ; only one copy is created
+
+2) prevent override
+
+```
+    public class Product {
+
+        public final String getName() {
+            ...
+        }
+    }
+
+    public class Tv extends Product {
+        ..
+
+          public  String getName() { // fails. Can't override final methods
+            ...
+        }
+    }
+
+```
+
+3) prevent inheritance
+
+```
+public final class Tv extends Product {
+
+}
+
+public class SmartTv extends Tv {} // fails
+
+```
+
+4) constant pointer
+
+```
+    Product p = new Mobile(...);
+
+    p = new Tv(..); // fails
+
+    final int[] data = {62,111,45};
+
+    data[0] = 11; // valid
+
+    data = new int[4]; // fails
+
+``
+
+Task:
+
+```
+  class Time {
+    private int hours;
+    private int min;
+    ///
+  }
+
+
+ class TimeClient {
+    main() {
+        Time t1 = new Time(4,30);
+        Time t2 = new Time(3, 45);
+
+        Time t3 = Time.add(t1, t2);
+
+        s.o.p(t3.getHours() + " : " + t3.getMin()); // 8: 15
+        s.o.p(t1.getHours() + " : " + t1.getMin()); // 4: 30
+        s.o.p(t2.getHours() + " : " + t2.getMin()); // 3: 45
+
+        Time t4 = t1.add(t2);
+        s.o.p(t4.getHours() + " : " + t4.getMin()); // 8: 15
+        s.o.p(t1.getHours() + " : " + t1.getMin()); // 4: 30
+        s.o.p(t2.getHours() + " : " + t2.getMin()); // 3: 45
+    }
+ }
+```
 
 
 
