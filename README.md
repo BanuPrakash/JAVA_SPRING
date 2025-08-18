@@ -234,10 +234,35 @@ Relationship between objects/class
 4) Uses A
 
 ===============
+* Java Build tools:
+1) Checkstyle and PMD / Findbugs
+Checkstyle is a static code analysis tool primarily used for Java programming. Its main purpose is to help developers ensure that their Java source code adheres to a predefined set of coding conventions.
+FindBugs is a defect detection tool for Java that uses static analysis to look for more than 200 bug patterns.
+PMD is a static code analyzer, most commonly referring to the open-source tool, which can be used to find common programming flaws, potential bugs, and code inefficiencies in various programming languages
 
-Generalization and Specialization
+2) Sonar 
+3) Maven / Gradle
+clean / Compile / package / deploy
+
+4) Jenkins
+CI / CD Pipeline
 
 
+Generalization and Specialization: IS A relationship; In Java java.lang.Object is the base class / root for every object. Single root hierarchy
+Keyword "extends" is used for specialization [ inheritance]
+
+Code Reusability choose between IS A / HAS A / USES A
+
+========================
+
+1) How Constructors work in inheritance
+2) Memory allocated
+3) How methods are executed.
+    Dynamic Binding / Polymorphism -> Runtime binding
+    static binding is only for static methods in Java
+
+    All instance methods in Java are Virtual by default
+==============
 
 
 
