@@ -265,8 +265,25 @@ Code Reusability choose between IS A / HAS A / USES A
 ==============
 
 
+```
+Product p = new Mobile();
 
+p instanceof Mobile ==> true
 
+p instanceof Product ==> true
+
+p instanceof Object ==> true
+
+p instanceof Tv ==> false
+
+p.getClass() == Mobile.class ==> true
+p.getClass() == Object.class ==> false
+p.getClass() == Product.class ==> false
+
+```
+
+If we know the method in advance:
+context.method(); like p.getPrice(); // works
 
 
 
