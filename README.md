@@ -223,6 +223,20 @@ one folder per package
 
 ```
 
+constructors, instance variables, instance methods, static var, static methods.
+
+=======================
+
+Relationship between objects/class
+1) Generalization and Specialization
+2) Realization
+3) Association
+4) Uses A
+
+===============
+
+Generalization and Specialization
+
 
 
 
