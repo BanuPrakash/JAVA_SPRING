@@ -164,6 +164,71 @@ context.behavior(parameters);
 
 ===============
 
+Logically grouping of objects / classes in enterprise application
+1) Entity / Model / Domain classes
+they represent business entity like for Uber taxi:
+Customer, Driver, Vehicle, Trip, PaymentDetails
+They survive the system crash, generelly they have persistence in database / files,..
+
+Ecommerce: Customer, Product, Supplier, Order, lineItems, ...
+
+2) DAO / Repository classes
+they contain CRUD operations ; INSERT, DELETE, MODIFY and FETCHING operations from persist store like MongoDB , RDBMS, file
+
+3) Business classes: business logic
+4) Utility classes: Helper classes like sorting / Date format handling, i18N
+5) Service classes : facade over DAO and business tier code/logic. Generally they are used to create atomic operations involving many DAO and business logic.
+```
+    Client selects Beneficiary and amount to transfer from UI
+    calls BankingService --> which internally has many fine grained operations
+
+    class BankingService {
+        // atomic operations; commit or rollback
+        public void transferFunds(Account fromAcc, Account toAcc, double amt) {
+            withdraw from fromAcc ; update
+            deposit to toAcc ; update
+            insert into transaction table; insert
+            send SMS
+            send Email
+        }
+     }
+```
+
+6) Client / UI specific classes: web / desktop / mobile
+
+packages: in java are for logical grouping of objects/classes
+one folder per package
+
+```
+    com
+      |
+      adobe
+        |
+        aem (prj/module)
+          |
+          entity
+            |
+             Customer.class [ mapped to Customer table / document]
+             Product.class
+             Order.class
+          repo [per table]
+            |
+            CustomerDao.class [ CRUD for Customer table]
+            ProductDao.class [ Crud for Product  table]
+            OrderDao.class
+         service
+            |
+            AdminService.class [for Actor Admin]
+            CustomerService.class [ for Customer actor]
+
+```
+
+
+
+
+
+
+
 
 
 
