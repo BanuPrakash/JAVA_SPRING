@@ -1,6 +1,7 @@
 package com.adobe.prj.entity;
 
-public abstract class Product {
+
+public abstract class Product implements Comparable {
     private int id;
     private String name;
     private double price;
@@ -44,4 +45,22 @@ public abstract class Product {
 
     // pure virtual machine
     public abstract boolean isExpensive();
+
+    // p1.compareTo(p2);
+    // this --> p1
+    // o --> p2
+    @Override
+    public int compareTo(Object o) {
+        Product other = (Product) o;
+        return (int)(this.price - other.price);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

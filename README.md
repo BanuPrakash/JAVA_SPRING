@@ -519,6 +519,40 @@ Class.forName("java.util.Date"); // loads the class into METASPACE
 Class.forName("com.adobe.prj.dao.MobileDaoDatabaseImpl") // loads the class
 Class.forName("com.adobe.prj.dao.MobileDaoDatabaseImpl").getConstructor().newInstance(); // create object
 
+
+```
+    Create objects based on arguments.
+
+    class PlantFactory {
+        public static Plant[] getPlants(String season) {
+            switch(season) {
+                case "SUMMER":
+                case "WINTER":
+                case "RAINY":
+                default:
+
+            }
+        }
+    }
+
+    Plant[] plants = PlantFactory.getPlants("SUMMER");
+```
+
+    George
+
+        Brad
+
+    Angelina
     
+        Scarlett
+
+    Anne
+
+
+    John
+
+    
+
+
 
 

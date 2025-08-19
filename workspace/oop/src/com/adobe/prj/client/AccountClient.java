@@ -5,7 +5,6 @@ import com.adobe.prj.entity.Account;
 public class AccountClient {
     public static void main(String[] args) {
         System.out.println("Count :" + Account.getCount()); // 0
-
         Account first = new Account(); // default
         System.out.println("Count :" + Account.getCount()); // 1
         Account swethaAcc = new Account(5000); // parametrized
