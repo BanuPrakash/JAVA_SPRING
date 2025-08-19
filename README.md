@@ -689,3 +689,27 @@ Set:
 2) not ordered, position of insertion depends on different algorithm/logic
 3) can't re-order nor supports index operations
 
+=================================
+https://rxmarbles.com/
+
+High Order Functions: 
+1) functions which accept function as argument
+2) function which returns a function
+Simple: treat function as first class member like primitive or object
+
+Commonly used HOF:
+1) filter [ to get subset] function takes a predicate function as argument
+2) map [ to transform data] function takes a transformFn
+3) forEach [ iterate] function takes a actionFn
+4) reduce [ aggregate like sum(), count(), avg()]
+
+Java 8 Streams provide a powerful and functional approach to processing sequences of elements, such as those found in collections (Lists, Sets, etc.) and arrays.
+Streams support various functional operations like filter (to select elements based on a condition), map (to transform elements), reduce (to combine elements into a single result), forEach (to iterate and perform an action on each element), and sorted (to sort elements).
+
+Intermediary functions: filter, map, limit, skip
+Terminal functions: collect, forEach, reduce
+
+stream -> skip(10) -> filter() -> map() -> collect()
+stream -> limt(100) -> map() -> filter() -> forEach()
+stream -> filter() -> map() -> reduce()
+
