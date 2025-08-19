@@ -644,3 +644,48 @@ public class Product implements Comparable<Product>{
 
 Lambda expression are for Functional interface.
 Functional interface is one which has only one method to implement.
+
+
+List vs Set
+List:
+1) data container which supports duplicate elements
+2) ordered
+3) re-ordered [sort / reverse / shuffle]
+4) supports index based operations [ get(5), add("", 4), remove(1)]
+
+Implementation classes: Vector(legacy), ArrayList, LinkedList, Apache Collections, Vavr collections
+
+```
+ArrayList:
+Uses a dynamic array internally to store elements. When the array reaches its capacity, a new, larger array is created, and elements are copied over.
+LinkedList:
+Uses a doubly linked list structure. Each element (node) stores the data and references to the next and previous nodes in the list.
+2. Performance Characteristics:
+Random Access (getting an element by index):
+ArrayList: Provides O(1) constant-time access due to direct array indexing.
+LinkedList: Offers O(n) linear-time access because it requires traversing the list from the beginning or end to reach a specific index.
+Insertions and Deletions (in the middle of the list):
+ArrayList: Involves shifting elements to make space for insertions or to close gaps after deletions, leading to O(n) linear-time complexity.
+LinkedList: More efficient for insertions and deletions at any position (O(1) if you have a reference to the node, otherwise O(n) due to traversal) as it only requires updating a few pointers.
+
+ArrayList list = new ArrayList(); // avoid this, not typesafe
+list.add("A");
+list.add(33);
+list.add(new Date());
+
+if(list.get(0) instanceof String) {
+    String s = (String) list.get(0);
+}
+
+ArrayList<Integer> list = new ArrayList<>(); // typesafe
+list.add("A"); // not supported
+list.add(33); // supports
+
+int x = list.get(0); // no need to do type checking
+```
+
+Set:
+1) unique collection
+2) not ordered, position of insertion depends on different algorithm/logic
+3) can't re-order nor supports index operations
+
