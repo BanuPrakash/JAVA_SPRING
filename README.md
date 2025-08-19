@@ -538,21 +538,86 @@ Class.forName("com.adobe.prj.dao.MobileDaoDatabaseImpl").getConstructor().newIns
     Plant[] plants = PlantFactory.getPlants("SUMMER");
 ```
 
-    George
+Generic Type: class , method, interface.
 
-        Brad
+```
+TypeWrapper classes: Integer, Short, Byte, Double, Float, Long
 
-    Angelina
-    
-        Scarlett
+Generics works only with objects and not primitive types
+ 
+Without Generics:
+public class IRectangle {
+    private int width;
+    private int height;
 
-    Anne
+}
+
+public class DRectangle {
+    private double width;
+    private double height;
+
+}
 
 
-    John
+public class Rectangle <T> {
+    private T width;
+    private T height;
 
-    
+    // Constructor
+    public Rectangle(T width, T height) {
+        this.width = width;
+        this.height = height;
+    }
+
+..
+
+Rectangle<Integer> r1 = new Rectangle<>(10, 5);
+Rectangle<Double> r2 = new Rectangle<>(10.5, 7.2);
+Rectangle<String> r3 = new Rectangle<>("A", "B"); // valid
 
 
+public class Rectangle<T extends Number> {
+    private T width;
+    private T height;
+    ...
+
+Rectangle<Integer> r1 = new Rectangle<>(10, 5);
+Rectangle<Double> r2 = new Rectangle<>(10.5, 7.2);
+Rectangle<String> r3 = new Rectangle<>("A", "B"); // invalid   
+
+
+int x = 100;
+Integer iX = x; // boxing or wrapping
+
+int y = iX; // unboxing
+```
+
+Java Collection Framework: provides data containers
+1) interfaces
+2) implementation classes
+3) algorithm / utility classes
+
+Array is a data container, has to be the first choice as data container
+Limitations:
+1) size is fixed, can't grow nor shrink
+2) adding or removing in arbitrary position is not efficient
+3) needs contiguous memory location
+
+
+Comparable vs Comparator
+* both are for comparison
+* Comparable: comparison logic is a part of object itself on which comparision has happen; example like in Product, String has compareTo() methods
+For String comparison is based on lexical based
+* Comparator: comparision logic is a part of client and not object; client might need different way of comparison
+Client needs to compare string based on length
+
+Example: File Object of OS can display files in a particular order, uses Comparable
+
+Finder is a client for file system which allows me to compare the same files ordered by date / kind / size / name
+
+Arrays and Collections classes are utility / algorithm classes which contain methods like sort(), max(), min(), binarySearch(), ... which works on contract like Comparable / Comparator
+
+Arrays works on array data container
+Collections works on List type of data container
 
 
