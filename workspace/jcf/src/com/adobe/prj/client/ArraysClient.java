@@ -50,10 +50,17 @@ public class ArraysClient {
 
         // Task 1:
         // Arrays.sort(products, lambda to sort products based on price
+        // type inference
+        Arrays.sort(products,(p1, p2) -> (int)(p1.getPrice() - p2.getPrice())); // avoid this
+        Arrays.sort(products,(p1, p2) -> Double.compare(p1.getPrice(), p2.getPrice()));
         // print
+        for(Product p: products) {
+            System.out.println(p); // toString()
+        }
 
         // Task 2:
         // Arrays.sort(products, lambda to sort products based on name
+        Arrays.sort(products,(p1, p2) -> p1.getName().compareTo(p2.getName()));
         // print
     }
 }
