@@ -390,3 +390,135 @@ Task:
     }
  }
 ```
+
+Recap:
+
+JRE, JVM, Metaspace, stack, heap
+
+Main Thread is started; for main thread a stack is created and main() method is pushed on the stack
+once main() method is popped out, the main thread dies.
+In single threaded application if main thread dies, Java application terminates.
+
+local variables --> Stack [ life of method]
+static variables --> metaspace [life of JRE]
+instance variables --> heap [life of object]
+
+Generalization and Specialization relationship --> inheritance --> extends
+* java.lang.Object is the root class for all objects in Java
+It's a single root hierarchy
+* Java doesn't support multiple inheritance
+* override: a class inherits a method, but need to redefine it
+
+Rules for overriding:
+1) method name has to be same
+2) parameters has to be same
+3) return type can be same or sub type
+```
+  class Account {
+    public Account getAccount() {
+
+    }
+  }
+
+  class SavingsAccount extends Account {
+    @Override
+    public SavingsAccount getAccount() { // valid
+
+    }
+  }
+```
+4) while overriding visibility can be same or we can enhance the visibility; can't weaken the visiblity
+default or protected can be made public.
+
+
+Day 2:
+
+Realization relationship: Contract
+a realization relationship is a relationship between two model elements, in which one model element (the client) realizes the behavior that the other model element (the supplier) specifies.
+
+Tv specfies HDMI contract;
+Set-top box / Camcorder / dVD player realizes the contract
+
+In java like in real world we use interfaces to achive Realization relationship.
+
+interfaces are like complete abstract class
+```
+    interface UserRepo {
+        void register(User user); // public and abstract by default --> pure virtual fn
+        User login(String username, String password); // public and abstract by default --> pure virtual fn
+    }
+
+    class UserRepoFileImpl implements UserRepo {
+        ...
+
+         public void register(User user) {
+            ///
+         }
+
+         public User login(String username, String password) {
+            ...
+         }
+    }
+
+     class UserRepoDatabaseImpl implements UserRepo {
+        ...
+
+         public void register(User user) {
+            ///
+         }
+
+         public User login(String username, String password) {
+            ...
+         }
+    }
+```
+
+Why Program to interface?
+1) DESIGN
+```
+  interface UserRepo {
+        void register(User user); 
+        User login(String username, String password); 
+    }
+```
+Common module is developed which contains entiies, exceptions, interfaces and pushed to the Git.
+Front end and backend developers can pull them and start working concurrently
+
+2) IMPLEMENTATION
+Both the ends like supplier and producer can start developing parallely
+Example: UI developers might use Andriod or Web
+Backend coders will start writing code to store in database
+
+3) INTEGRATION
+Integration of supplier and producer can be done without any issues because both the ends are programmed to contract.
+
+4) TESTING
+    testing can be done using mock 
+5) LOOSE COUPLING
+
+======================
+
+Scenario 1: Code is getting changed in client; there could be many clients like web / mobile / tv / desktop...
+Solution: Use a factory method; this factory is common to all clients; instead of changing in all clients we change in factory
+
+Scenario 2: Code is getting changed in factory to switch between strategies instead of client.
+Problem: Switching between straties code changes in factory which leads to again testing, bundling and redeploying on server...
+Solution : use Configuration files like XML / properties / YAML files
+Factory reads from config files and instantiates different objects.
+Changes happens only in config files and not in java.
+
+XML needs SAX or DOM Parser
+YAML needs Jackson / Jettison libraries.
+
+================
+
+Different ways of creating an object:
+1) if we know class name in advance new Mobile() --> prefer
+2) if class name is dynamic, like comming from XML / properites file
+Class.forName("java.util.Date"); // loads the class into METASPACE
+Class.forName("com.adobe.prj.dao.MobileDaoDatabaseImpl") // loads the class
+Class.forName("com.adobe.prj.dao.MobileDaoDatabaseImpl").getConstructor().newInstance(); // create object
+
+    
+
+
