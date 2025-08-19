@@ -621,3 +621,26 @@ Arrays works on array data container
 Collections works on List type of data container
 
 
+Without Generics:
+````
+public class Product implements Comparable {
+@Override
+    public int compareTo(Object o) {
+        Product p = (Product) o;
+        return 0;
+    }
+```
+
+With Generics:
+
+```
+public class Product implements Comparable<Product>{
+    @Override
+    public int compareTo(Product o) {
+        return 0;
+    }
+
+```
+
+Lambda expression are for Functional interface.
+Functional interface is one which has only one method to implement.
