@@ -360,7 +360,7 @@ public class SmartTv extends Tv {} // fails
 
     data = new int[4]; // fails
 
-``
+```
 
 Task:
 
@@ -390,6 +390,3 @@ Task:
     }
  }
 ```
-
-
-
