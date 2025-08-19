@@ -713,3 +713,62 @@ stream -> skip(10) -> filter() -> map() -> collect()
 stream -> limt(100) -> map() -> filter() -> forEach()
 stream -> filter() -> map() -> reduce()
 
+
+Set --> HashSet and TreeSet implementations
+TreeSet is rearly used [ RedBlack Tree]
+
+HashCode
+1) a hash code is an integer value generated for an object, 
+used primarily in data structures which are  hash based for efficient storage and retrieval
+2) If two objects are equal according to the equals() method, their hashCode() values must be equal. 
+However, the reverse is not necessarily true: unequal objects can have the same hash code (a collision)
+
+Bad HashCode Example:
+```
+    public class Rectangle {
+        int width;
+        int breadth;
+
+        public int hashCode() {
+            retur width * breadth;
+        }
+    }
+
+    Rectangle r1 = new Rectangle(4,5); // hascode = 20
+    Rectangle r2 = new Rectangle(5,4); // hascode = 20
+    Rectangle r3 = new Rectangle(10,2); // hascode = 20
+    Rectangle r4 = new Rectangle(20,1); // hascode = 20
+    Rectangle r5 = new Rectangle(2,10); // hascode = 20
+    Rectangle r6 = new Rectangle(1,20); // hascode = 20
+ 
+ Good hashCode:
+ @Override
+    public int hashCode() {
+        int result = 17; // Initial prime number
+        result = 31 * result + width.hashCode();
+        result = 31 * result + Integer.hashCode(breadth); // For primitive int
+        // ... and so on for other fields
+        return result;
+    }
+
+```
+
+HashSet, HashMap uses hashCode() and equals() method for finding duplicates and positioning of element in container
+
+if hashCode() collides then only call equals() to check if its duplicate or not.
+
+========
+
+Map :
+A map data structure, also known as a dictionary, associative array
+Key-Value Pairs: Data is organized as pairs, where a unique key maps to a specific value.
+Unique Keys: Each key within a map must be unique, ensuring that each value can be unambiguously accessed.
+
+Task:
+1) Patient entity with id, name and age
+2) create PriorityQueue implementation of Queue interface to give priority to senior citizens
+
+Queue --> FIFO
+
+========
+

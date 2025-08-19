@@ -4,6 +4,7 @@ import com.adobe.prj.entity.Product;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -46,5 +47,16 @@ public class StreamExample {
                 .map(p -> p.getPrice())
                 .reduce(0.0, (v1, v2) -> v1 + v2);
         System.out.println("Total : " + total);
+
+        System.out.println("***************");
+       Map<String, List<Product>> prodCat =
+//               products.stream().collect(Collectors.groupingBy(p -> p.getCategory()));
+               products.stream().collect(Collectors.groupingBy(Product::getCategory)); // method reference
+
+       prodCat.forEach( (k,v) -> {
+           System.out.println("Category : " + k);
+//           v.forEach(p -> System.out.println(p));
+           v.forEach(System.out::println); // method reference
+       });
     }
 }

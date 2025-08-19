@@ -1,5 +1,7 @@
 package com.adobe.prj.entity;
 
+import java.util.Objects;
+
 public class Product implements Comparable<Product>{
     private int id;
     private String name;
@@ -61,5 +63,26 @@ public class Product implements Comparable<Product>{
     @Override
     public int compareTo(Product o) {
         return id - o.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+
+        if (id != product.id) return false;
+        if (!Objects.equals(name, product.name)) return false;
+        return Objects.equals(category, product.category);
+    }
+
+    // if state of object changes, its hashCode also changes
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
     }
 }
