@@ -971,8 +971,41 @@ mysql> select * from products;
 
 ```
 
+JEE: Java Enterprise Edition
 
-Convert the existing application to Web based application
-Resume @ 2:00
+Java Enterprise Edition (Java EE), now known as Jakarta EE, is a set of specifications that extends Java Standard Edition (Java SE) to provide a platform for developing and deploying large-scale, multi-tiered, and secure enterprise applications. It is designed for use in distributed environments and handles features like web services, distributed computing, and database management.
 
+Web based application
+Tomcat / Jetty / Netty are Servlet engines / Containers to serve dynamic content written in Java
+
+request and response objects are created for every client requests:
+request: encapsulates all data coming from client; like form data; query params; browser; OS
+response: used to write data back to client
+
+Once response is commited to the client; request and response objects are destroyed; thread is released back to the pool
+
+How does the Servlet container / engine know which Servlet to inoke for a given URL?
+ANS: metadata in the form of XML [web.xml] or annotation
+
+Servlet is an interface
+GenericServlet implements Servlet interface
+HttpServlet extends GenericServlet
+
+Any Servlet we write should extend from HttpServlet and provide methods to handle HTTP methods [ GET / POST / PUT / DELETE / PATCH...]
+
+GET: method of request when client makes a request from Address Bar / HYPERLINK; to fetch data; no payload
+POST: method of request for sending payload/data from client to be inserted in server side
+
+
+database
+  |
+   HTML /CSS / JS  
+  |
+  WEB-INF
+    web.xml
+   classes
+     |
+     LoginServlet.class
+     RegisterServlet.class
+     ProductServlet.class
 
