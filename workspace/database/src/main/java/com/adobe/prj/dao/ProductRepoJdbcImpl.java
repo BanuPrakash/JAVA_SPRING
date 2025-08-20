@@ -55,7 +55,7 @@ public class ProductRepoJdbcImpl implements  ProductRepo {
     @Override
     public void addProduct(Product product) throws PersitenceException {
         Connection con = null;
-        String SQL = "INSERT INTO product(id, name, price) VALUES (0, ?, ?)";
+        String SQL = "INSERT INTO products(id, name, price) VALUES (0, ?, ?)";
         try {
             con = DriverManager.getConnection(URL, USER, PWD);
             PreparedStatement statement = con.prepareStatement(SQL);

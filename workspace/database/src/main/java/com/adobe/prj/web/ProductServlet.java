@@ -1,5 +1,6 @@
 package com.adobe.prj.web;
 
+import com.adobe.prj.dao.PersitenceException;
 import com.adobe.prj.dao.ProductRepo;
 import com.adobe.prj.dao.ProductRepoJdbcImpl;
 import com.adobe.prj.entity.Product;
@@ -41,6 +42,18 @@ public class ProductServlet extends HttpServlet {
     // POST http://localhost:8080/products
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+       Product product = new Product();
+       product.setName(req.getParameter("name"));
+       product.setPrice(Integer.parseInt(req.getParameter("price")));
+       ProductRepo productRepo = new ProductRepoJdbcImpl();
+        try {
+            productRepo.addProduct(product);
+//            System.out.println("Product added!!!");
+            resp.sendRedirect("index.jsp?msg=Product added!!!");
+        } catch (PersitenceException e) {
+            //    System.out.println(e.getMessage()); // end user
+               e.printStackTrace(); // developer
+            resp.sendRedirect("index.jsp?msg=" + e.getMessage());
+        }
     }
 }
