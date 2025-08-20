@@ -1024,5 +1024,64 @@ http://localhost:8080/products
     name : ...
     price: ...
 
-    
+
+```
+In java class /interface /annotation / enum / record types
+
+Annotation:
+Metadata --> data about data.
+
+1) Who uses it?
+a) COMPILER
+b) CLASSLOADER
+c) RUNTIME [JRE]
+
+2) Where can I use it?
+a) METHOD [@Override]
+b) CLASS [@WebServlet]
+c) FIELD
+d) PARAMETERS
+
+COMPILER USED Annotation:
+Source --> Compiler uses annotation --> bytecode [wont have annotation]
+
+RUNTIME used Annotation:
+Annotations will be present in JRE and used at runtime [@WebServlet]
+
+
+CLASSLOADER used annotation: [made up]
+@Mobile(make="Samsung")
+public class CandyCrush extends Game {
+
+}
+
+Source --> Compiler --> bytecode [ has annotation]
+bytecode --> classloader --> metaspace [ annotation is removed]
+
+Samsung Team will write there own classloaders;
+Cisco also writes there own classloaders [ Webx Cam, Hathway ]
+
+=============
+
+We as developers can easily write annotations to be used @ RUNTIME
+
+ORM simulation using annotation;
+we map class to table
+fields to columns
+generate DDL and DML statements
+
+```
+    @Table(name="books")
+    public class Book {
+        @Column(name="BID", type="NUMERIC(12,2)")
+        int id;
+
+        @Column(name="TITLE")
+        String name;
+    }
+
+CREATE table books (BID NUMERIC(12,2) TITLE VARCHAR(200));
+INSERT into books ...
+
+
 ```
