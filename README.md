@@ -940,4 +940,33 @@ Local Repository:
 </dependency>
 ```
 
-Resume @ 11:20
+Docker is an open source platform that enables developers to build, deploy, run, update and manage containerized applications.
+Softwares are available as images in docker hub.
+Docker Container --> running application.
+
+
+```
+
+mysql> create database NCG_JAVA;
+
+mysql> use NCG_JAVA;
+
+mysql> create table products (id int PRIMARY KEY AUTO_INCREMENT, name varchar(100), price double);
+
+
+mysql> insert into products values (0, 'iPhone 16', 89000.00);
+
+
+mysql> insert into products values (0, 'Wacom', 5000.00);
+
+
+mysql> select * from products;
++----+-----------+-------+
+| id | name      | price |
++----+-----------+-------+
+|  1 | iPhone 16 | 89000 |
+|  2 | Wacom     |  5000 |
++----+-----------+-------+
+
+
+```
