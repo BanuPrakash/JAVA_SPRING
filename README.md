@@ -770,5 +770,174 @@ Task:
 
 Queue --> FIFO
 
-========
+====================
 
+Recap:
+1) Realization relationship using interface and implements
+a class can realize multiple interfaces / contract
+2) Anonymous class
+
+```
+interface Flyable {
+    fly();
+}
+class Bird implements Flyable {
+    name;
+    age;
+    colour;
+    // behaviour
+    public void fly() {
+        // 
+    }
+} 
+
+class AeroPlane implements Flyable {
+    name
+    capacity
+    make
+    // behaviour
+    public void fly() {
+        //
+    }
+}
+
+Flyable f = new Flyable() {
+    public void fly() {
+        //
+    }
+}
+```
+
+3) Lambda expression: if the interface is Functional interface [ interface with only one method to define] we can use lamba [arrow function] instead of anonymous class
+
+Flyable f = () -> {}
+
+4) Comparable vs Comparator
+5) List, Set, Arrays and Collections
+6) Stream and HOF like filter, map, reduce, collect, forEach
+
+
+=================
+
+Day 3:
+
+Introduction to Exception Handling:
+Any abnormal condition that arises during program execution is an exception.
+A) Error type of exception: abnormal condition that can't be rectified during program execution
+Examples: StackOverflowError [ issue with bad recursive code without exit condition]
+java -Xss:64kb MyCode
+OutOfMemoryError: no space in Metaspace [ too many classes are loaded into the JVM]; too many objects in heap area
+
+B) Exception type of exception: abnormal condition which can be handled in application [ as in can provide an alternate flow]
+Exception type of exception can be classified as:
+1) Checked Type of exception
+should be handled using try / catch / finally block
+Compiler enforces you to handle it
+Generally these exceptions are triggred from outside of JRE
+
+```
+    try {
+         FileInputStream fis = new FileInputStream("a.txt");  // OS might thro exception if file is not present
+        ...
+    } catch(FileNotFoundException ex) {
+        ..
+    }
+
+    try {
+        Connection con = DriverManager.getConnection(URL, USER, PWD); // Database might throw exception
+
+    } catch(SQLException ex) {
+        ...
+    }
+```
+2) Unchecked type of exception
+    should be handled using conditional statement; Compiler will not enforce you to have handling mechanism
+    All Unchecked exceptions happens because of a reason within JRE
+    ```
+        public void addProduct(Product p) {
+            if(p != null) { // NullPointerException is avoided
+                save product in database...
+            }
+        }
+
+        int[] data = {5,55,11};
+        int index = 4;
+        if(index >= 0 and index < data.length) { // ArrayIndexOutOfBoundsException is avoided
+            System.out.println(data[index]); 
+        }
+    ```
+
+=========================
+
+JDBC: Java Database Connectivity -> Integration Library to connect to RDBMS
+
+Java Application <----> JDBC <----> RDBMS
+
+Java provides a set of interfaces for JDBC; implementation classes are provided by database vendors
+
+Steps involved in using JDBC:
+1) Load database implmentation classes into JVM Class.forName(...)
+2) Establish a database connection
+```
+    Connection is a interface provided by JDBC
+    getConnection() is a factory Method, based on URL it creates OracleConnection / PostgresConnection / MySQLConnection
+    Oracle URL: jdbc:oracle:thin:@192.22.134.13:1521:emp_db
+    MySQL URL: jdbc:mysql://192.34.14.14:3306/emp_db
+
+    java.sql.Connection con = DriverManager.getConnection(URL, USER, PWD);
+
+```
+
+3) Send SQL statements for DML [ INSERT / DELETE / UPDATE / SELECT]
+3.1) Statement
+if SQL is same for n requests
+select * from products
+3.2) PreparedStatement
+if SQL takes IN parameters
+select * from accounts where acc_no = ?
+insert into users values (?, ?, ?, ?);
+
+Automatically handles the escaping of special characters in input parameters, preventing malicious SQL injection attacks. 
+
+https://owasp.org/Top10/A03_2021-Injection/
+Don't concat SQL instead use PreparedStatement
+ http://example.com/app/accountView?id='100 OR 1 = 1' --
+ String query = "SELECT \* FROM accounts WHERE custID='" + request.getParameter("id") + "'";
+
+ResultSet executeQuery(SELECT)
+int executeUpdate( INSERT / DELETE / UPDATE)
+
+
+3.3) CallableStatement
+
+
+
+4) ResultSet
+
+=============================
+
+Maven /Gradle
+Maven and Gradle are both popular build automation tools primarily used for Java projects, though they support other languages as well. 
+They aim to automate the process of building, testing, and deploying software, as well as managing project dependencies.
+
+pom.xml --> Project Object Model a file where goals for build / test / package and depenency entries are configured
+
+pom.xml will be pushed to Git / Repo where all team members uses the same pom.xml and download dependencies
+
+Local Repository:
+/Users/banuprakash/.m2
+
+```
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>9.4.0</version>
+</dependency>
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.38</version>
+</dependency>
+```
+
+Resume @ 11:20
