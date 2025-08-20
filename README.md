@@ -997,6 +997,7 @@ GET: method of request when client makes a request from Address Bar / HYPERLINK;
 POST: method of request for sending payload/data from client to be inserted in server side
 
 
+```
 database
   |
    HTML /CSS / JS  
@@ -1009,3 +1010,15 @@ database
      RegisterServlet.class
      ProductServlet.class
 
+mvn clean
+mvn compile
+mvn package --> creates war file
+
+mvn jetty:run
+    starts jetty server in default port 8080 using embedded plugin
+    triggers war plugin --> trigger compiler plugin
+    war is deployed on jetty
+
+http://localhost:8080/products
+
+```
