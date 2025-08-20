@@ -85,6 +85,10 @@ public class ProductRepoJdbcImpl implements  ProductRepo {
 
     @Override
     public Product getProduct(int id) {
+        // Complete this using PreparedStatement
+        // passing id which is present should return Product
+        // else throw FetchException with message
+        // Product with id 45 doesn't exist!!!
         return null;
     }
 }
