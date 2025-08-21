@@ -30,6 +30,13 @@ public class RentalService {
 
     // pass booking id and return date
     // atomic operation, unit of work
+
+    /**
+     *
+     * @param id rental ID
+     * @param returnDate when vehicle is returned
+     * @return success message
+     */
     @Transactional
     public String returnBookedVehicle(int id, Date returnDate) {
         Booking booking = bookingRepo.findById(id).get(); // get complete booking info form DB
@@ -39,6 +46,7 @@ public class RentalService {
         long diffInMillies = Math.abs(returnDate.getTime() - booking.getDateFrom().getTime());
         long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         double amount = cost * diff;
+
         booking.setDateTo(returnDate); // DIRTY
         booking.setAmount(amount); // DIRTY
         // no explicit UPDATE called
