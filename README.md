@@ -1169,4 +1169,9 @@ a) @ComponentScan: scans "com.adobe.springdemo" package and its sub packages for
 b) @EnableAutoConfiguration: opiniated objects like database connection pool, etc are created based on type of project.
 c) @Configuration
 
+ employeeRepoMongoImpl
 
+
+Field employeeRepo in AppService required a single bean, but 2 were found:
+	- employeeRepoJdbcImpl: 
+	- employeeRepoMongoImpl:
