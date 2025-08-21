@@ -1175,3 +1175,9 @@ c) @Configuration
 Field employeeRepo in AppService required a single bean, but 2 were found:
 	- employeeRepoJdbcImpl: 
 	- employeeRepoMongoImpl:
+
+==============
+
+3rd Party classes won't have above mentioned 8 annotations, Spring can't instantiate and manage it. Even they are not eligible for wiring.
+
+Solution: Factory method
