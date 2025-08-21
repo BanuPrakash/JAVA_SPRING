@@ -17,7 +17,6 @@ public class AppService {
     DataSource dataSource;
 
     @Autowired
-    @Qualifier("employeeRepoJdbcImpl")
     private EmployeeRepo employeeRepo; // implementation class is wired, loosely coupled
 
     public void doTask() {

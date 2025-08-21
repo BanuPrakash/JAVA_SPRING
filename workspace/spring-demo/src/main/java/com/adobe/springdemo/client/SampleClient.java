@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 public class SampleClient implements CommandLineRunner {
     @Autowired
     private AppService service;
+
     // executes as soon as spring container is created and initialized
     @Override
     public void run(String... args) throws Exception {
