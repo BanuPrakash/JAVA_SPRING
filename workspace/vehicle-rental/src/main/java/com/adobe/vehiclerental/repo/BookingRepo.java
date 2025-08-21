@@ -13,6 +13,6 @@ public interface BookingRepo extends JpaRepository<Booking, Integer> {
 
     @Query(value = "SELECT * FROM vehicles v WHERE v.reg_no NOT IN " +
             "(SELECT b.vehicle_fk FROM bookings b " +
-            " WHERE :dt BETWEEN b.date_from AND b.date_to)", nativeQuery = true)
+            " WHERE :dt BETWEEN b.date_from AND b.date_to OR b.date_to is null)", nativeQuery = true)
     List<Vehicle> getAvailableVehicles(@Param("dt") Date date);
 }
