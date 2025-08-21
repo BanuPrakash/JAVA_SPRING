@@ -1319,3 +1319,20 @@ https://martinfowler.com/bliki/BoundedContext.html
 within @Transactional boundary if an entity becomes DIRTY, ORMs will trigger an UPDATE SQL.
 no need for explicit UPDATE SQL call.
 
+
+
+
+```
+JP-QL
+uses class and field names [case-sensitive]
+from Vehicle
+from Vehicle where registrationNumber = ?
+select registrationNumber, fuelType from Vehicle
+
+SQL
+uses table and column names
+select * from vehicles
+select * from vehicles where reg_no = ?
+select reg_no, fuel_type from vehicles
+
+```
