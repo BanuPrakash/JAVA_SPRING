@@ -1291,3 +1291,16 @@ if required alter table like adding columns, changing data types.
 Good for Bottom-Top approach
 Map class to existing table, can't alter tables
 Can't create new tables
+
+Spring Boot Project with : MySQL, lombok, Spring Data Jpa dependency.
+
+======================
+
+Any issue with lombok:
+Preferences | Build, Execution, Deployment | Compiler | Annotation Processors
+vehiclerentalapp --> Obtain from classpath
+
+mvn clean
+
+
+
