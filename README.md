@@ -1302,5 +1302,20 @@ vehiclerentalapp --> Obtain from classpath
 
 mvn clean
 
+bookings
 
+id | customer_fk       | vehicle_fk     | date_from.  | date_to    | amount
+
+23  | anne@adobe.com.  | UP-15-EB-4321 |  18-AUG-2025. | null.        | 0
+24  | roger@adobe.com. | KA-05-AB-1234 |  18-AUG-2025. | 20-AUG-2025 | 8900.00
+25 | roger@adobe.com |  DH-10-AA-0434 | 21-AUG-2025 | null | 0
+26 | peter@adobe.com | KA-05-AB-1234 | 21-AUG-2025 | null | 0
+
+DDD: Domain Driven Design --> Root Aggregate Object
+
+https://martinfowler.com/bliki/BoundedContext.html
+
+
+within @Transactional boundary if an entity becomes DIRTY, ORMs will trigger an UPDATE SQL.
+no need for explicit UPDATE SQL call.
 

@@ -1,21 +1,50 @@
 package com.adobe.vehiclerental.service;
 
+import com.adobe.vehiclerental.entity.Booking;
 import com.adobe.vehiclerental.entity.Customer;
 import com.adobe.vehiclerental.entity.Vehicle;
+import com.adobe.vehiclerental.repo.BookingRepo;
 import com.adobe.vehiclerental.repo.CustomerRepo;
 import com.adobe.vehiclerental.repo.VehicleRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class RentalService {
     private final VehicleRepo vehicleRepo; // constructor wiring instead of @Autowired [setter]
     private final CustomerRepo customerRepo;
+    private final BookingRepo bookingRepo;
+
+    // this won't have return date and amount
+    public Booking doBooking(Booking booking) {
+        return bookingRepo.save(booking);
+    }
+
+    // pass booking id and return date
+    // atomic operation, unit of work
+    @Transactional
+    public String returnBookedVehicle(int id, Date returnDate) {
+        Booking booking = bookingRepo.findById(id).get(); // get complete booking info form DB
+        Vehicle vehicle = vehicleRepo.findById(booking.getVehicle().getRegistrationNumber()).get();
+        double cost = vehicle.getDailyHireRate();
+
+        long diffInMillies = Math.abs(returnDate.getTime() - booking.getDateFrom().getTime());
+        long diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+        double amount = cost * diff;
+        booking.setDateTo(returnDate); // DIRTY
+        booking.setAmount(amount); // DIRTY
+        // no explicit UPDATE called
+        // booking became DIRTY, ORM does DIRTY CHECKING and issues UPDATE SQL
+        return "Vehicle returned!!!";
+    }
 
     public long getVehicleCount() {
         return vehicleRepo.count();
