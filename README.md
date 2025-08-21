@@ -1085,3 +1085,88 @@ INSERT into books ...
 
 
 ```
+
+Recap:
+Maven: Goals like clean , compile, package; manage dependencies
+
+JDBC: Integration library to connect to RDBMS [MySQL / Oracle / Postgres / H2 ..]
+
+Web based application :Servlet container and Servlets
+Web related objects are injected like HttpServletRequest and HttpServletResponse
+
+====================================
+
+Spring Framework:
+Lightweight container for building enterprise applications.
+Manage life cycle of beans and wiring dependencies [SOLID] --> Dependency Injection.
+
+Bean: Any object managed by spring framework
+
+Spring container needs metadata --> XML or Annotation
+
+```
+    public interface EmployeeDao {
+        void addEmployee(Employee e);
+    }
+
+    @Repository
+    public class EmployeeDaoJdbcImpl implements EmployeeDao {
+        ...
+    }
+
+    @Service
+    public class AppService {
+        @Autowired
+        private EmployeeDao employeeDao;
+
+        public void task(Employee e) {
+            employeeDao.addEmployee(e);
+        }
+    }
+
+```
+
+Spring instantiates classes which has one of these annotations:
+1) @Component [utility , helper classes]
+2) @Repository [storage like RDBMS , mongoDB]
+The primary advantage of @Repository is its role in Spring's exception translation mechanism. When a class is annotated with @Repository, Spring can automatically translate technology-specific data access exceptions (e.g., SQLException from JDBC, Hibernate exceptions) into Spring's unified DataAccessException hierarchy.
+
+https://github.com/spring-projects/spring-framework/blob/main/spring-jdbc/src/main/resources/org/springframework/jdbc/support/sql-error-codes.xml
+
+3) @Service
+4) @Configuration [ factory methods, reading config files, ...]
+5) @Controller [Web based]
+6) @RestController [RESTful web based application]
+7) @ControllerAdvice [ exception handling]
+8) @ShellComponent [ REPL like NodeJS application , jshell]
+
+==============================
+
+Spring Boot framework:
+Highly opiniated framework on top of Spring Framework, many configurations comes out of box.
+
+1) Assume we are developing Web based application
+following things are configured out-of-box:
+a) Embedded Tomcat Servlet Container/engine; alternates are Jetty / Netty
+b) Jackson library is configured to convert Java <---> JSON; alternates are GSON, JETTISON, Moxy
+c) DispatcherServlet is configured as FrontController
+```
+@WebServlet("*")
+public class DispatcherServlet extends HttpServlet {
+    ..
+}
+```
+
+2) Assume we are developing Database application
+a) Database connection pooling is provided by HikariCP library
+Using DriverManager.getConnection() is getting and closing each connection
+Latency involved in this
+
+....
+
+@SpringBootApplication is 
+a) @ComponentScan: scans "com.adobe.springdemo" package and its sub packages for above mentioned 8 annotations and instantiates
+b) @EnableAutoConfiguration: opiniated objects like database connection pool, etc are created based on type of project.
+c) @Configuration
+
+
