@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -52,6 +53,10 @@ public class RentalService {
         // no explicit UPDATE called
         // booking became DIRTY, ORM does DIRTY CHECKING and issues UPDATE SQL
         return "Vehicle returned!!!";
+    }
+
+    public List<Booking> getBookings() {
+        return bookingRepo.findAll();
     }
 
     public long getVehicleCount() {
