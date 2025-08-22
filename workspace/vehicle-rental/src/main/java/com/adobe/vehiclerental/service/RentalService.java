@@ -3,6 +3,7 @@ package com.adobe.vehiclerental.service;
 import com.adobe.vehiclerental.entity.Booking;
 import com.adobe.vehiclerental.entity.Customer;
 import com.adobe.vehiclerental.entity.Vehicle;
+import com.adobe.vehiclerental.exceptions.VehicleNotFoundException;
 import com.adobe.vehiclerental.repo.BookingRepo;
 import com.adobe.vehiclerental.repo.CustomerRepo;
 import com.adobe.vehiclerental.repo.VehicleRepo;
@@ -89,17 +90,16 @@ public class RentalService {
         return  customerRepo.findAll();
     }
 
-    public Vehicle getByRegNo(String reg) {
+    public Vehicle getByRegNo(String reg) throws VehicleNotFoundException {
         Optional<Vehicle> opt = vehicleRepo.findById(reg);
         if(opt.isPresent()) {
             return opt.get();
-        } else {
-            return null; // modify to exception later
         }
+        throw  new VehicleNotFoundException("Vehicle with Registration Number " + reg + " doesn't exist!!!");
     }
 
     @Transactional
-    public  Vehicle updateHireRate(String regNo, double cost) {
+    public  Vehicle updateHireRate(String regNo, double cost) throws VehicleNotFoundException {
         vehicleRepo.updateVehicleHireRate(regNo, cost);
         return  getByRegNo(regNo);
     }

@@ -2,7 +2,9 @@ package com.adobe.vehiclerental.api;
 
 
 import com.adobe.vehiclerental.entity.Vehicle;
+import com.adobe.vehiclerental.exceptions.VehicleNotFoundException;
 import com.adobe.vehiclerental.service.RentalService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,20 +32,20 @@ public class VehicleController  {
     // use PATH Parameter to access RESOURCE by ID --> Unique [ / ]
     // GET http://localhost:8080/api/vehicles/KA-05-AB-1234
     @GetMapping("/{reg}")
-    public Vehicle getVehicleByRegNo(@PathVariable("reg") String regNo) {
+    public Vehicle getVehicleByRegNo(@PathVariable("reg") String regNo) throws VehicleNotFoundException  {
         return service.getByRegNo(regNo);
     }
 
     // POST http://localhost:8080/api/vehicles
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED) // 201
-    public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+    public Vehicle addVehicle(@RequestBody @Valid Vehicle vehicle) {
         return service.addVehicle(vehicle);
     }
 
     //PATCH http://localhost:8080/api/vehicles/KA-05-AB-1234?cost=7612.55
     @PatchMapping("/{regNo}")
-    public  Vehicle update(@PathVariable("regNo") String regNo, @RequestParam("cost") double cost) {
+    public  Vehicle update(@PathVariable("regNo") String regNo, @RequestParam("cost") double cost) throws VehicleNotFoundException{
         return  service.updateHireRate(regNo, cost);
     }
 }

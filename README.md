@@ -1621,10 +1621,44 @@ create orders.http
 
 ---------------
 
-Resume @ 2:30
+Global Exception Handling:
+@ControllerAdvice is a specialized annotation introduced in Spring Framework 3.2 [Before Spring Boot] that enables global exception handling across your entire Spring MVC application.
+It handles exceptions thrwon from @Controller or @RestController classes
+
+Spring Boot 3.x --> Spring Framework 6
+Spring Boot 2.x --> Spring Framework 5
 
 
+ ResponseEntity is a class that represents an entire HTTP response, allowing for comprehensive control over the response sent back to a client.
+ we can send payload and headers like status code, cache settings, ETag.
+
+------------
+
+Validation: Payload has to be validated
+
+https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary
+
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+ </dependency>
+
+ public Vehicle addVehicle(@RequestBody @Valid Vehicle vehicle) {
+
+```
+BindingResult is an interface within the Spring Framework, specifically used in Spring MVC, to capture and manage errors that occur during the data binding and validation process of user input.
 
 
+Exception: 
+```
+MethodArgumentNotValidException: 
+ 3 errors: 
+ [Field error in object 'vehicle' on field 'registrationNumber': rejected value [AP-09-AA]; codes [Pattern.vehicle.registrationNumber,Pattern.registrationNumber,Pattern.java.lang.String,Pattern]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [vehicle.registrationNumber,registrationNumber]; arguments []; default message [registrationNumber],[Ljakarta.validation.constraints.Pattern$Flag;@747cf9c0,^[A-Z]{2}-[0-9]{2}-[A-Z]{0,2}-[0-9]{4}$]; default message [Registration Number AP-09-AA is not valid!!]] 
+ 
+ [Field error in object 'vehicle' on field 'dailyHireRate': rejected value [3.0]; codes [Min.vehicle.dailyHireRate,Min.dailyHireRate,Min.double,Min]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [vehicle.dailyHireRate,dailyHireRate]; arguments []; default message [dailyHireRate],1000]; default message [Daily Hire Rate entered 3.0 should be more than 1000]] 
+ 
+ [Field error in object 'vehicle' on field 'fuelType': rejected value [null]; codes [NotBlank.vehicle.fuelType,NotBlank.fuelType,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [vehicle.fuelType,fuelType]; arguments []; default message [fuelType]]; default message [Fuel Type is required!!!]] ]
 
+```
 

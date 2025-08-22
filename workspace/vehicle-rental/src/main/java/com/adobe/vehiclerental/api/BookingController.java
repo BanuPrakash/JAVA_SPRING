@@ -21,7 +21,9 @@ public class BookingController {
     // Content-type: application/json
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+//    public String bookVehicle(@RequestBody @Valid BookingDTO booking) {
     public String bookVehicle(@RequestBody Booking booking) {
+        // form BookingDTO we need to create Booking object to be passed to service - repo ->DB
         service.doBooking(booking);
         return  "Vehicle Rental booked!!!";
     }

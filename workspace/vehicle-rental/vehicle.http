@@ -39,3 +39,15 @@ Accept:application/json
 # "fuelType": "GAS"
 #}
 
+
+
+### @name="add invalid Vehicle"
+POST http://localhost:8080/api/vehicles
+Accept: application/json
+Content-Type: application/json
+
+{
+  "registrationNumber": "AP-09-AA-1234",
+
+  "dailyHireRate": 3999.00
+}
