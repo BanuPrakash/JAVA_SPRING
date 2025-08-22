@@ -1540,4 +1540,59 @@ POST / PUT are not safe methods
 
 What Is Idempotence? Idempotence, in programming and mathematics, is a property of some operations such that no matter how many times you execute them, you achieve the same result.
 
-Resume @ 11:20
+```
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+ </dependency>
+```
+
+Spring Web Module provides:
+1) Tomcat as Emdedded Servlet Container / web server; default runs on 8080 port
+server.port=1234 in application.properties
+2) Jackson library for Java < --- > JSON
+3) DispatcherServlet and HandlerMapping
+
+GET http://localhost:8080/api/vehicles
+Accept: application/json
+
+
+POST http://localhost:8080/api/vehicles
+Accept: application/json
+Content-type: application/json
+
+{
+    "registrationNumber": "AP-09-AA-1111",
+    "fuelType": "DIESEL",
+    "dailyHireRate": 3500.00
+}
+
+
+```
+
+    @RestController
+    @RequestMapping("api/vehicles")
+    public class VehicleController  {
+            @Autowired
+            RentalService service;
+
+            @GetMapping()
+            public List<Vehicle> getVehicles() {
+                return service.getVehicles();
+            }
+
+
+            @PostMapping()
+            public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
+                return service.addVehicle(vehicle);
+            }
+
+    }
+
+
+
+
+```
+https://www.postman.com/
+
+POSTMAN / build REACT application / Angular / Andriod / Swift for POST request
