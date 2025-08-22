@@ -1665,3 +1665,42 @@ MethodArgumentNotValidException:
 SQL: to get booking and vehicle details
 select v.reg_no, v.fuel_type, v.hire_rate, b.date_from, b.date_to from bookings b inner join vehicles v where b. vehicle_fk = v.reg_no;
 
+========================
+
+Task: 
+
+Ticket Tracker application
+
+```
+    employees
+    email | first_name | role
+
+    projects
+    id | name 
+    52.  aem
+
+    tickets
+
+    ticket_id | raised_by_fk(to employee) | issue |  project_fk | raised_date | resolved_by | resolved_date | resolve_text
+
+
+Use Case 1:
+Raise a Ticket
+tickets
+
+    ticket_id | raised_by_fk(to employee) | issue       |  project_fk | raised_date | resolved_by | resolved_date | resolve_text
+        534     sam@adobe.com               Reebot          52.         19-08-2025.   NULL.         NULL             NULL
+
+
+use case 2;
+resolve a ticket only by IT Team
+
+        ticket_id | raised_by_fk(to employee) | issue       |  project_fk | raised_date | resolved_by | resolved_date            | resolve_text
+        534     sam@adobe.com               Reebot          52.         19-08-2025.     jack@adobe.com         20-08-2025             re-install OS
+
+
+````
+
+https://www.database-answers.com/data_models/online_exams/index.html
+
+Security is pending; Cors, ...
