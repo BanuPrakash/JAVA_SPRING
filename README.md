@@ -1336,3 +1336,208 @@ select * from vehicles where reg_no = ?
 select reg_no, fuel_type from vehicles
 
 ```
+
+ORM Mapping 
+Objects <---> Relational database table
+fields <---> columns of table
+@Entity, @Table, @Column, @Id, @JoinColumn
+
+Association Mapping:
+1) one-to-one
+2) one-to-many
+3) many-to-one
+4) many-to-many
+
+One To One mapping:
+@JoinColumn introduces FOREIGN KEY in owning table/entity
+```
+    public class Employee {
+        email;
+        firstName;
+        lastName;
+        hireDate;
+
+    }
+
+    public class Laptop {
+        serialNo;
+        make;
+        description;
+        RAM;
+        storage;
+
+        @OneToOne
+        @JoinColumn(name="emp_fk")
+        Employee employee;
+    }
+
+    employees
+    email.              | fname. | lname | hire_date |
+    roger@adobe.com                                     
+
+    laptops
+    serial_no | make        | emp_fk
+    YLW34114    Macbook      rita@adobe.com
+
+```
+
+Many To One
+ @JoinColumn introduces FOREIGN KEY in owning table/entity
+
+```
+    class Ticket {
+        ticketId;
+        issue
+        raised_date;
+        resolved_date;
+
+        @ManyToOne
+        @JoinColumn(name="emp_raised_by")
+        Employee raisedBy;
+
+        @ManyToOne
+         @JoinColumn(name="emp_resolved_by")
+        Employee resolvedBy;
+    }
+
+    class Employee {
+        email
+        firstName;
+
+    }
+
+    tickets
+    ticket_id | issue               | raised_date       | resolved_date     | emp_raised_by     | emp_resolved_by | resolve_text
+    241         Copilot                 20-1ug-2025         20-08-2025        rita@adobe.com        peter@adobe.com    reinstall
+    345         IntelliJ Licence        21-aug-2025          22-08-2025      rita@adobe.com.        roger@adobe.com.   licence updated
+
+    employees
+    email               | fname
+    roger@adobe.com
+    rita@adobe.com
+    peter@adobe.com
+```
+
+One To Many:  @JoinColumn(name="order_fk") introduces FK in child table / entity
+
+Assume ORder has 5 line items 
+Without Cascade:
+
+```
+    Save:
+    orderRepo.save(order);
+    itemRepo.save(i1);
+    itemRepo.save(i2);
+    itemRepo.save(i3);
+    itemRepo.save(i4);
+    itemRepo.save(i5);
+
+    Delete:
+    orderRepo.delete(order);
+    itemRepo.delete(i1);
+     itemRepo.delete(i2);
+      itemRepo.delete(i3);
+       itemRepo.delete(i4);
+        itemRepo.delete(i5);
+
+```
+
+With Cascade: orderRepo.save(order); // takes care of saving its line items along with order
+orderRepo.delete(order); // takes care of deleting items also along with order
+
+Association can be aggregation or composition:
+Order to Line items --> Composition:
+but composition represents a stronger, lifetime-dependent "part-of" relationship.
+
+Project --> has many employees [@OneToMany]
+here don't use Cascade --> Aggregation
+
+
+Dependency Injection can be :
+1) setter Dependency Injection
+ class AppService {
+    EmployeeDao empDao;
+
+    public void setEmployeeDao(EmployeeDao e) {
+        empDao = e;
+    }
+ }
+
+EmployeeDao empDao = new EmployeeDaoJdbcImpl();
+ AppService service = new AppService();
+ service.setEmployeeDao(empDao);
+
+Above code is waht happens with @Autowired
+
+2) Constructor Dependency Injection
+
+ class AppService {
+    EmployeeDao empDao;
+
+    public AppService(EmployeeDao e) {
+        empDao = e;
+    }
+ }
+EmployeeDao empDao = new EmployeeDaoJdbcImpl();
+ AppService service = new AppService(empDao); 
+
+
+```
+@Service
+@RequiredArgsConstructor
+public class OrderService {
+    private  final OrderRepo orderRepo;
+    private  final ProductRepo productRepo;
+
+
+OrderService orderService = new OrderService(orderRepo, productRepo);
+
+By default Spring looks for Default Constructor for instatiation
+
+If we have only parameterized constructor, Spring invokes it and passes depenedency
+```
+
+Dirty Checking: within a @Transactional boundary if an entity becomes dirty / change --> ORM will flush the new state to database by issuing UPDATE SQL
+
+Within @Transactional boundary if no exception occurs it commits, else it rollsback all operations --> ATOMIC operation
+
+
+Spring depends on 3rd party libaries like ByteBuddy / JavaAssist/ CGLib 
+Byte Buddy is a code generation and manipulation library for creating and modifying Java classes during the runtime of a Java application.
+Javassist (Java Programming Assistant) makes Java bytecode manipulation simple. It is a class library for editing bytecodes in Java
+
+
+==================
+
+Server Side Rendering and Client Side rendering
+CSR:
+1) less payload [ between client and server only JSON/XML ] is passed and not entire page
+2) we can have heterogenous clients like [web / Mobile / Desktop / Tv]
+
+Building RESTful Web Application
+
+REpresentational State Transfer.
+
+* Resource: anything which can be named and present on server like database / file / image / Printer
+* Representation : state of resource at a given point of time like Printer is ON / OFF / BUSY
+* ContentNegotiation: serving representation in variious formats like JSON / XML / CSV based on clients request sent thro an HTTP header
+Accept: application/json
+Accept: text/xml
+
+REST works on HTTP/HTTPS protocol
+* URL identifies a Resource
+* HTTP methods are used for CRUD operations
+GET --> READ
+POST --> CREATE
+PUT/PATCH --> UPDATE
+DELETE --> DELETE
+
+GET / DELETE / PATCH won't have payload
+POST / PUT has payload
+
+GET / DELETE are safe methods
+POST / PUT are not safe methods
+
+What Is Idempotence? Idempotence, in programming and mathematics, is a property of some operations such that no matter how many times you execute them, you achieve the same result.
+
+Resume @ 11:20
