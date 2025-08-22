@@ -1605,12 +1605,25 @@ https://www.baeldung.com/sprint-boot-multipart-requests
 
 Task:
 
+add web dependency in pom.xml
+modify settings for lombok
+mvn clean
+
 Ecommerce application convert it into RESTful WS
 1) ProductController [ add, get all products] POST and GET
 2) OrderController [ place order, get all orders] POST and GET
 
 If time permits get products by range
 http://localhost:8080/api/products?low=5000&high=25000
+
+create products.http
+create orders.http
+
+---------------
+
+Resume @ 2:30
+
+
 
 
 
