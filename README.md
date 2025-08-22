@@ -1596,3 +1596,7 @@ Content-type: application/json
 https://www.postman.com/
 
 POSTMAN / build REACT application / Angular / Andriod / Swift for POST request
+
+For FileHandling use Multipart request:
+https://www.baeldung.com/sprint-boot-multipart-requests
+

@@ -74,6 +74,11 @@ public class RentalService {
         return  vehicleRepo.findAll();
     }
 
+    public List<Vehicle> getVehiclesByType(String type) {
+        // select * from vehicles
+        return  vehicleRepo.findByFuelType(type);
+    }
+
     public List<Customer> getCustomers() {
         // select * from customers
         return  customerRepo.findAll();
@@ -86,5 +91,11 @@ public class RentalService {
         } else {
             return null; // modify to exception later
         }
+    }
+
+    @Transactional
+    public  Vehicle updateHireRate(String regNo, double cost) {
+        vehicleRepo.updateVehicleHireRate(regNo, cost);
+        return  getByRegNo(regNo);
     }
 }
