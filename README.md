@@ -1662,3 +1662,6 @@ MethodArgumentNotValidException:
 
 ```
 
+SQL: to get booking and vehicle details
+select v.reg_no, v.fuel_type, v.hire_rate, b.date_from, b.date_to from bookings b inner join vehicles v where b. vehicle_fk = v.reg_no;
+

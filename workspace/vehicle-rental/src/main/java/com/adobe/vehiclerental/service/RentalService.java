@@ -1,5 +1,6 @@
 package com.adobe.vehiclerental.service;
 
+import com.adobe.vehiclerental.dto.RentalVehicleDTO;
 import com.adobe.vehiclerental.entity.Booking;
 import com.adobe.vehiclerental.entity.Customer;
 import com.adobe.vehiclerental.entity.Vehicle;
@@ -102,5 +103,9 @@ public class RentalService {
     public  Vehicle updateHireRate(String regNo, double cost) throws VehicleNotFoundException {
         vehicleRepo.updateVehicleHireRate(regNo, cost);
         return  getByRegNo(regNo);
+    }
+
+    public List<RentalVehicleDTO> getVehicleRentalInfo() {
+        return bookingRepo.getVehicleRentalInfo();
     }
 }

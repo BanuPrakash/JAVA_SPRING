@@ -1,5 +1,6 @@
 package com.adobe.vehiclerental.api;
 
+import com.adobe.vehiclerental.dto.RentalVehicleDTO;
 import com.adobe.vehiclerental.entity.Booking;
 import com.adobe.vehiclerental.service.RentalService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,12 @@ public class BookingController {
     @GetMapping()
     public List<Booking> getBookings() {
         return  service.getBookings();
+    }
+
+
+    // GET http://localhost:8080/api/bookings/report
+    @GetMapping("/report")
+    public List<RentalVehicleDTO> getVehicleRentalInfo() {
+        return service.getVehicleRentalInfo();
     }
 }
