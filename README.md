@@ -1765,4 +1765,53 @@ MockMVC:  It performs full Spring MVC request handling but via mock request and 
 
 =============
 
-Resume @ 11:10 for Spring Security
+Question:
+Can you please tell the usecase where the times in verify is >1
+
+```
+class BankingService {
+    @Transactional
+    public void transferFunds(Account fromAcc, Account toAcc, double amt) {
+        ...
+        accountRepo.update(fromAcc);
+        ...
+        accountRepo.update(toAcc);
+    }
+}
+While testing Service tier i need to check update() is called twice..
+
+```
+
+Created a Simple  spring boot  web project with only web dependency.
+
+http://localhost:8080/admin
+http://localhost:8080/user
+http://localhost:8080/
+
+
+Adding Spring Security
+
+provides Authentication and Authorization Support
+
+
+```
+
+ <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+ </dependency>
+
+```
+
+By adding above dependency:
+1) all resources become protected
+2) Default one user is created with username = "user" and generated password
+Using generated security password: 54803f69-5462-48b2-b205-56512166dbf1
+3) login and logout pages are created
+http://localhost:8080/logout
+4) Built in Filters are configured to handle security
+
+Filter's are like Servlet's which are used for interceptor pattern, helpers along with Servlet for web applications:
+SecurityFilter , ProfileFilter, Logging, Encryption, Encoding, Decoding, i18NFilter ,...
+Generally they are used to have some cross-cutting concerns which are not a part of main logic.
+
