@@ -1763,3 +1763,6 @@ Each Test Spec/ test case is marked as  @Test.
 MockMVC:  It performs full Spring MVC request handling but via mock request and response objects instead of a running server. like GET / POST / PUT / PATCH..
 
 
+=============
+
+Resume @ 11:10 for Spring Security
