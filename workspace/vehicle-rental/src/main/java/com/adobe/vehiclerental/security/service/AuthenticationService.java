@@ -1,10 +1,10 @@
 package com.adobe.vehiclerental.security.service;
 
 
-import com.adobe.rentalapp.security.dto.SignInRequest;
-import com.adobe.rentalapp.security.dto.SignUpRequest;
-import com.adobe.rentalapp.security.entity.User;
-import com.adobe.rentalapp.security.repo.UserDao;
+import com.adobe.vehiclerental.security.dto.SignInRequest;
+import com.adobe.vehiclerental.security.dto.SignUpRequest;
+import com.adobe.vehiclerental.security.entity.User;
+import com.adobe.vehiclerental.security.repo.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,15 +30,15 @@ public class AuthenticationService {
                 .build();
         System.out.println(user);
         userDao.save(user); // cascade takes care of saving roles also
-//        var jwt = jwtService.generateToken(user);
-//        return jwt;
         return "registered !!!";
     }
 
     // login
     public  String signIn(SignInRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        var user = userDao.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email/password"));
+        authenticationManager.authenticate(new
+                UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        var user = userDao.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid email/password"));
         var jwt = jwtService.generateToken(user);
         return jwt;
     }

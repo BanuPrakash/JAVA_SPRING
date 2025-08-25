@@ -1,8 +1,8 @@
 package com.adobe.vehiclerental.security.api;
 
 
-import com.adobe.rentalapp.security.service.JwtService;
-import com.adobe.rentalapp.security.service.UserDetailsServiceImpl;
+import com.adobe.vehiclerental.security.service.JwtService;
+import com.adobe.vehiclerental.security.service.UserDetailsServiceImpl;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -48,6 +48,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             UserDetails userDetails = userDetailsService.userDetailsService().loadUserByUsername(email);
             if(jwtService.isTokenValid(jwt, userDetails)) {
                 System.out.println("Token is valid!!!");
+
+                // SecurityContext is stateless, not associated with JSESSIONID
+                // destroyed when response is committed to User
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken authenticationToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

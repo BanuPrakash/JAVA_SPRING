@@ -1,8 +1,8 @@
 package com.adobe.vehiclerental.security.api;
 
-import com.adobe.rentalapp.security.dto.SignInRequest;
-import com.adobe.rentalapp.security.dto.SignUpRequest;
-import com.adobe.rentalapp.security.service.AuthenticationService;
+import com.adobe.vehiclerental.security.dto.SignInRequest;
+import com.adobe.vehiclerental.security.dto.SignUpRequest;
+import com.adobe.vehiclerental.security.service.AuthenticationService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

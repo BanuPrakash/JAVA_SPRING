@@ -1,8 +1,8 @@
 package com.adobe.vehiclerental.security.cfg;
 
 
-import com.adobe.rentalapp.security.api.JwtAuthenticationFilter;
-import com.adobe.rentalapp.security.service.UserDetailsServiceImpl;
+import com.adobe.vehiclerental.security.api.JwtAuthenticationFilter;
+import com.adobe.vehiclerental.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,11 +34,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request.requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/swagger-ui/index.html").permitAll()
-                        .requestMatchers("/swagger-ui/swagger-initializer.js").permitAll()
-                        .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/v3/**").permitAll()
-                         .requestMatchers("/api/vehicles").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/api/vehicles").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/api/rentals").hasAnyRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

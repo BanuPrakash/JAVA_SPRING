@@ -1,7 +1,7 @@
 package com.adobe.vehiclerental.security.service;
 
 
-import com.adobe.rentalapp.security.entity.User;
+import com.adobe.vehiclerental.security.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

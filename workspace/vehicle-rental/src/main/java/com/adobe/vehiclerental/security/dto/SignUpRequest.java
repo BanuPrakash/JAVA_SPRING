@@ -1,6 +1,7 @@
 package com.adobe.vehiclerental.security.dto;
 
-import com.adobe.rentalapp.security.entity.Role;
+
+import com.adobe.vehiclerental.security.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

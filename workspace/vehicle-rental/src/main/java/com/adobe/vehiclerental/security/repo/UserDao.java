@@ -1,8 +1,8 @@
 package com.adobe.vehiclerental.security.repo;
 
 
-import com.adobe.rentalapp.security.entity.User;
-import com.adobe.rentalapp.security.service.UserDetailsServiceImpl;
+import com.adobe.vehiclerental.security.entity.User;
+import com.adobe.vehiclerental.security.service.UserDetailsServiceImpl;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

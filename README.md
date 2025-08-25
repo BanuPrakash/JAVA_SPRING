@@ -1945,5 +1945,9 @@ User <---> Role will be a Many to Many association
 
     ID |        EMP_FK      | PROJECT_FK | ROLE         | STARTED_FROM  | WORKED_TILL
     13  roger@adobe.com          52         LEAD            2-10-2018       12-6-2020
-    
+
 ```
+
+1) Registration
+
+SignUpRequest DTO -->

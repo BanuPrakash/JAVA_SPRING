@@ -1,7 +1,7 @@
 package com.adobe.vehiclerental.security.service;
 
 
-import com.adobe.rentalapp.security.repo.UserDao;
+import com.adobe.vehiclerental.security.repo.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
