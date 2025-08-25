@@ -1815,3 +1815,6 @@ Filter's are like Servlet's which are used for interceptor pattern, helpers alon
 SecurityFilter , ProfileFilter, Logging, Encryption, Encoding, Decoding, i18NFilter ,...
 Generally they are used to have some cross-cutting concerns which are not a part of main logic.
 
+https://docs.spring.io/spring-security/reference/servlet/appendix/database-schema.html
+
+https://bcrypt-generator.com/
