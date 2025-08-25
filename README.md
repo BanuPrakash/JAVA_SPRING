@@ -1818,3 +1818,132 @@ Generally they are used to have some cross-cutting concerns which are not a part
 https://docs.spring.io/spring-security/reference/servlet/appendix/database-schema.html
 
 https://bcrypt-generator.com/
+
+================
+
+Make VehicleRental application secure using JWT.
+
+Stateless:
+The key reasons for this stateless nature are:
+Scalability: By not maintaining client state on the server, RESTful services can be easily scaled horizontally. Any server instance can handle any request, allowing for efficient load balancing and reduced memory footprint on individual servers.
+Reliability: Statelessness makes the system more resilient to failures. If a server goes down, another server can pick up the request without losing any client session data, as that data is sent with each request.
+
+Solution: Token based authorization - JWT JSON Web Token is a std representing claims securely between two parties.
+JWT Token:
+```
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.
+KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
+
+HEADER:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+PAYLOAD: contains claims
+{
+    "sub": "roger@adobe.com", // who you are?
+    "iat": 34345523,
+    "exp": 36623225,
+    "iss": "https://secure.adobe.com",
+    "authorities": "ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"
+}
+
+
+SIGNATURE:
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  topsecret256bytesofSaltValue)
+
+topsecret256bytesofSaltValue has to be a really secured SALT value, generally coming from ENV variable or GIT REPO or Seperate Config Server 
+
+Option 1: we can use same SALT value to generate TOKEN and Validate TOKEN
+
+Option 2: Use Private Key to generate a Token, Public key to validate TOKEN
+AuthServer generates TOKEN, Resource server [udemy / linkedin resources / Adobe Spectrum ...] uses public key to validate Token 
+
+```
+
+Changes in VehcileRental application:
+1) application.properties --> added SALT 
+2) Added Dependencies in pom.xml
+3) added security package and sub packages.
+
+Key Components in Spring Security for JWT:
+JwtUtil (or similar utility class): A custom class to encapsulate JWT operations like generation, validation, and extraction of claims.
+
+JwtAuthenticationFilter: A custom filter that intercepts incoming requests, extracts the JWT from the header, validates it, and sets the Authentication object in the Spring Security context. [Note SecurityContext data is per request and not associated with JSESSIONID]--> Stateless
+
+WebSecurityConfigurerAdapter (or SecurityFilterChain in Spring Security 6+): Configures the security chain, including adding the custom JWT filter and defining authorization rules.
+
+
+User <---> Role will be a Many to Many association
+
+```
+    Move <---> Actor looks like ManyToMany but it's not
+
+    @Table(name="movies")
+    class Movie {
+        mid;
+        name
+       
+        @ManyToMany
+        @JoinTable(
+        name = "movie_actor", // Name of the join table
+        joinColumns = @JoinColumn(name = "movie_fk"), // Foreign key for Movie
+        inverseJoinColumns = @JoinColumn(name = "actor_fk") // Foreign key for Actor
+    )
+        Set<Actor> actors;
+    }
+
+    @Table(name="actors")
+    class Actor {
+        aid;
+        name;
+    }
+
+    movies
+    mid.   | name
+    31      Pulp Fiction
+    32      Broken Arrow
+
+
+    actors
+    aid    | name
+    73      John Travolta
+    74      Uma Thruman
+    75      Bruce Willis
+
+
+    movie_actor
+    movie_fk    | actor_fk
+    31             73
+    31              74
+    32              73
+    32              75
+
+    In reality link table might contain additional data like Role played by actor
+
+    Once Additional data comes in link Table
+     movie_actor
+    movie_fk    | actor_fk  | role. | duration_in_movie
+    31             73           
+    31              74
+    32              73
+    32              75
+
+    We need a seperate class called as MovieActor [association class]
+
+    Movie 1 <----> * MovieActor * <----> 1 Actor
+
+
+    Employee <---> Project looks like ManyToMany but we need additional data in link table like role of employee in Project, working duration in project
+
+    employees_projects
+
+    ID |        EMP_FK      | PROJECT_FK | ROLE         | STARTED_FROM  | WORKED_TILL
+    13  roger@adobe.com          52         LEAD            2-10-2018       12-6-2020
+    
+```
