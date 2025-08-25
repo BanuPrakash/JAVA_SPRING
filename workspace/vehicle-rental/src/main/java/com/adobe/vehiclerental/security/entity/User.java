@@ -28,7 +28,7 @@ public class User implements UserDetails  {
     private String password;
     // extra fields
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name="USERS_ROLES",
          joinColumns = {
             @JoinColumn(name="USER_ID")},
